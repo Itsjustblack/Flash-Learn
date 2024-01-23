@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="/css/style.css"
+		/>
+		<title>FlashCard Quiz</title>
+	</head>
+	<body>
+		<%- include("./partials/navbar.ejs") %>
+		<main
+			class="bg-gray-900 h-screen pt-[68px] px-20 flex flex-col items-center"
+		>
+			<section class="pt-7">
+				<header class="flex justify-between">
+					<h2 class="text-white text-3xl font-bold">
+						<%= currentDeck.title %>
+					</h2>
+					<a href="/auth/login">
+						<button
+							type="button"
+							class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						>
+							Edit
+						</button>
+					</a>
+				</header>
+				<div class="mt-6">
+					<div
+						class="bg-[#2e3856] w-[744px] h-[400px] rounded-lg flex justify-center items-center relative"
+					>
+						<div
+							class="w-6 h-6 absolute top-5 right-5 cursor-pointer hover:scale-125 transition-transform duration-300"
+						>
+							<img
+								class="w-full h-full object-cover"
+								src="/assets/star.svg"
+								alt=""
+							/>
+						</div>
+						<h2 class="text-white font-semibold text-3xl">What is Life</h2>
+					</div>
+					<div class="flex mt-6 justify-center items-center gap-x-10">
+						<button
+							class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+						>
+							<img
+								class="w-[90%] h-[90%] object-cover"
+								src="/assets/arrow-left.svg"
+								alt=""
+							/>
+						</button>
+						<div>
+							<span class="text-white font-light text-sm">1 / 2</span>
+						</div>
+						<button
+							class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+						>
+							<img
+								class="w-[90%] h-[90%] object-cover"
+								src="/assets/arrow-right.svg"
+								alt=""
+							/>
+						</button>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
