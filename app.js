@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectToDB = require("./config/db");
 const cardRoute = require("./routes/card");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
 const verfiyToken = require("./middleware/verifyToken");
 const cookies = require("cookie-parser");
 
@@ -26,7 +27,10 @@ app.use(express.static("public"));
 connectToDB();
 
 // Auth Routes
-app.use("/auth", authRoute);
+app.use("/", authRoute);
+
+// User Routes
+app.use("/users", verfiyToken, userRoute);
 
 // Card Routes
 app.use("/", verfiyToken, cardRoute);

@@ -2,6 +2,17 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+// Display SignUp Page
+router.get("/register", (req, res) => {
+	res.render("register");
+});
+
+// Display Login Page
+router.get("/", (req, res) => {
+	// const token = req.cookies.authToken;
+	res.render("login");
+});
+
 // Create User
 router.post("/register", async (req, res) => {
 	const user = new User({
@@ -15,15 +26,10 @@ router.post("/register", async (req, res) => {
 
 	try {
 		const savedUser = await user.save();
-		res.send({ id: savedUser.id });
+		res.redirect("/auth/login");
 	} catch (error) {
 		res.status(400).send(error);
 	}
-});
-
-// Display Login Page
-router.get("/login", (req, res) => {
-	res.render("login");
 });
 
 // Login User
@@ -40,39 +46,6 @@ router.post("/login", async (req, res) => {
 		.cookie("authToken", token, { httpOnly: true })
 		// .send("Successful Login")
 		.redirect("/dashboard");
-});
-
-// Get User by ID
-router.post("/users", async (req, res) => {
-	try {
-		const user = await User.findById(req.body.id);
-		if (!user) throw new Error();
-		return res.send(user);
-	} catch (error) {
-		res.status(400).send("User Not Found");
-	}
-});
-
-// Get User by Email
-router.post("/users", async (req, res) => {
-	try {
-		const user = await User.findOne({ email: req.body.email });
-		if (!user) throw new Error();
-		return res.send(user);
-	} catch (error) {
-		res.status(400).send("User Not Found");
-	}
-});
-
-// Delete User by Email
-router.delete("/users", async (req, res) => {
-	try {
-		const deletedUser = await User.findOne({ email: req.body.email });
-		if (!deletedUser) throw new Error();
-		return res.send(deletedUser);
-	} catch (error) {
-		res.status(400).send("User not found");
-	}
 });
 
 module.exports = router;
