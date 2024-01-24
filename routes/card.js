@@ -18,12 +18,36 @@ router.get("/decks/create", (req, res) => {
 	res.render("create");
 });
 
+// Update a Deck
+router.post("/decks/edit/:id", async (req, res) => {
+	const id = req.params.id;
+	try {
+		const currentDeck = await Deck.findByIdAndUpdate(id, req.body, {
+			new: true,
+		});
+		res.send({ id: currentDeck._id });
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
 // Display a Deck by ID
 router.get("/decks/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
 		const currentDeck = await Deck.findById(id);
 		res.render("deck", { currentDeck });
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
+// Display Edit Deck Page
+router.get("/decks/edit/:id", async (req, res) => {
+	const id = req.params.id;
+	try {
+		const currentDeck = await Deck.findById(id);
+		res.render("edit", { currentDeck });
 	} catch (error) {
 		res.status(400).send(error);
 	}
