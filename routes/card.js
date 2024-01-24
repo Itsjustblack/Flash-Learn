@@ -13,6 +13,11 @@ router.get("/dashboard", async (req, res) => {
 	}
 });
 
+// Display Create Deck Page
+router.get("/decks/create", (req, res) => {
+	res.render("create");
+});
+
 // Display a Deck by ID
 router.get("/decks/:id", async (req, res) => {
 	const id = req.params.id;
@@ -24,12 +29,8 @@ router.get("/decks/:id", async (req, res) => {
 	}
 });
 
-router.get("/deck/create", (req, res) => {
-	res.render("create.ejs");
-});
-
 // Create New Deck
-router.post("/deck/create", async (req, res) => {
+router.post("/decks/create", async (req, res) => {
 	const deck = new Deck({
 		title: req.body.title,
 		cards: req.body.cards,
@@ -37,18 +38,18 @@ router.post("/deck/create", async (req, res) => {
 	});
 	try {
 		const savedDeck = await deck.save();
-		res.send({ id: savedDeck.id });
+		res.send({ id: savedDeck._id });
 	} catch (error) {
 		res.status(400).send(error);
 	}
 });
 
 // Delete Deck by ID
-router.delete("/:id", async (req, res) => {
+router.delete("/decks/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
 		const currentDeck = await Deck.findByIdAndDelete(id);
-		res.send({ id: currentDeck.id });
+		res.send(JSON.stringify({ id: currentDeck.id }));
 	} catch (error) {
 		res.status(400).send(error);
 	}

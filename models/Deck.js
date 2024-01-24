@@ -6,9 +6,9 @@ const deckSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		minlength: 2,
-		maxlength: 50,
+		maxlength: 100,
 	},
-	cards: [Card.schema],
+	cards: { type: [Card.schema], required: true },
 	createdAt: {
 		type: Date,
 		default: Date.now(),

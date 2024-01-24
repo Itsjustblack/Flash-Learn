@@ -12,7 +12,49 @@
 		/>
 		<title>QuizLearn</title>
 	</head>
-	<body>
+	<body class="bg-gray-900 h-full">
 		<%- include("./partials/navbar.ejs") %>
+		<main
+			class="bg-gray-900 h-screen pt-[68px] px-32 flex flex-col items-center"
+		>
+			<section class="pt-7 w-full pb-10">
+				<form onsubmit="handleSubmit(event)">
+					<header class="flex justify-between mt-5 mb-6">
+						<h1 class="font-bold text-3xl text-white text-left">Create Deck</h1>
+						<button
+							type="submit"
+							id="submit"
+							class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						>
+							Create
+						</button>
+					</header>
+					<label
+						for="title"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>Title</label
+					>
+					<input
+						name="title"
+						type="text"
+						id="title"
+						class="border text-sm rounded-lg block w-full px-2.5 py-3 bg-[#2e3856] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+						placeholder="Enter Your Title"
+						required
+					/>
+					<section
+						id="card-holder"
+						class="mt-9 grid gap-y-6 mb-6"
+					></section>
+				</form>
+				<button
+					id="add-card"
+					class="w-full bg-[#2e3856] text-white py-10 rounded-lg hover:underline hover:underline-offset-4 font-bold text-lg"
+				>
+					Add a Card
+				</button>
+			</section>
+		</main>
+		<script src="/scripts/createDeck.js"></script>
 	</body>
 </html>

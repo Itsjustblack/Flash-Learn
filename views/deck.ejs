@@ -46,31 +46,47 @@
 						</div>
 						<h2 class="text-white font-semibold text-3xl">What is Life</h2>
 					</div>
-					<div class="flex mt-6 justify-center items-center gap-x-10">
-						<button
-							class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
-						>
-							<img
-								class="w-[90%] h-[90%] object-cover"
-								src="/assets/arrow-left.svg"
-								alt=""
-							/>
-						</button>
-						<div>
-							<span class="text-white font-light text-sm">1 / 2</span>
+					<div class="my-3 relative">
+						<div class="flex justify-center items-center gap-x-10">
+							<button
+								class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+							>
+								<img
+									class="w-[90%] h-[90%] object-cover"
+									src="/assets/arrow-left.svg"
+									alt=""
+								/>
+							</button>
+							<div>
+								<span class="text-white font-light text-sm">1 / 2</span>
+							</div>
+							<button
+								class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+							>
+								<img
+									class="w-[90%] h-[90%] object-cover"
+									src="/assets/arrow-right.svg"
+									alt=""
+								/>
+							</button>
 						</div>
 						<button
-							class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+							class="hover:scale-105 transition-transform duration-200 absolute top-[20%] right-5"
+							type="button"
+							id="delete-card"
+							data-currentCard="<%= currentDeck._id %>"
 						>
 							<img
-								class="w-[90%] h-[90%] object-cover"
-								src="/assets/arrow-right.svg"
+								class="w-6 h-6 object-cover"
+								src="/assets/delete.svg"
 								alt=""
 							/>
 						</button>
 					</div>
+					<div class="w-full bg-white h-[1px] rounded-md"></div>
 				</div>
 			</section>
 		</main>
+		<script src="/scripts/deck.js"></script>
 	</body>
 </html>
