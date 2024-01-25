@@ -5,16 +5,14 @@ const slides = document.querySelector("[data-slides]");
 
 sliderButtons.forEach((button) => {
 	slides.children[0].dataset.active = "active";
+	DisableNextButton(button);
 	button.addEventListener("click", (e) => {
 		const offset = button.dataset.sliderButton === "next" ? 1 : -1;
 		const activeSlide = slides.querySelector(`[data-active="active"]`);
 		let newIndex = [...slides.children].indexOf(activeSlide) + offset;
 
-		console.log(newIndex);
+		if (newIndex < 1) newIndex = slides.children.length - 1;
 
-		// console.log([...slides.children].indexOf(activeSlide));
-
-		if (newIndex < 0) newIndex = slides.children.length - 1;
 		if (newIndex > slides.children.length - 1) newIndex = 0;
 
 		[...slides.children][newIndex].dataset.active = "active";
@@ -36,3 +34,9 @@ deleteButton.addEventListener("click", async (e) => {
 		console.log(error);
 	}
 });
+
+function DisableNextButton(button) {
+	if (button.dataset.sliderButton) {
+		if (slides.children.length <= 1) button.disabled = true;
+	}
+}

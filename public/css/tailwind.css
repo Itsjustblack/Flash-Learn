@@ -17,3 +17,11 @@ body {
 	transition: opacity 200ms ease-in-out;
 	transition-delay: 200ms;
 }
+
+button:disabled {
+	background-color: blueviolet;
+}
+
+button:disabled:hover {
+	background-color: none;
+}
