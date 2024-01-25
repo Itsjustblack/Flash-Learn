@@ -570,10 +570,6 @@ video {
   position: relative;
 }
 
-.inset-0{
-  inset: 0px;
-}
-
 .right-5{
   right: 1.25rem;
 }
@@ -638,6 +634,10 @@ video {
 
 .block{
   display: block;
+}
+
+.inline-block{
+  display: inline-block;
 }
 
 .flex{
@@ -739,6 +739,10 @@ video {
 
 .max-w-screen-xl{
   max-width: 1280px;
+}
+
+.shrink-0{
+  flex-shrink: 0;
 }
 
 .cursor-pointer{
@@ -1184,23 +1188,55 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.slide[data-active="not-active"] {
-  opacity: 0;
-  transition: opacity 200ms ease-in-out;
+/* .slide[data-active="not-active"] {
+	opacity: 0;
+	transition: opacity 200ms ease-in-out;
 }
 
 .slide[data-active="active"] {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out;
-  transition-delay: 200ms;
+	opacity: 1;
+	transition: opacity 200ms ease-in-out;
+	transition-delay: 200ms;
+} */
+
+div[data-slides] {
+  transition: transform 0.3s ease-in-out;
+  white-space: nowrap;
 }
 
-button:disabled {
-  background-color: blueviolet;
+/* Flip Card Styles */
+
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
 }
 
-button:disabled:hover {
-  background-color: none;
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card[data-flipped="true"] .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  background-color: #bbb;
+  color: white;
+  transform: rotateY(180deg);
 }
 
 .hover\:-translate-y-3:hover{
@@ -1323,6 +1359,16 @@ button:disabled:hover {
 .focus\:ring-primary-600:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(37 99 235 / var(--tw-ring-opacity));
+}
+
+.disabled\:bg-black:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.disabled\:hover\:bg-black:hover:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 640px){

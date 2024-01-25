@@ -31,69 +31,102 @@
 						</button>
 					</a>
 				</header>
-					<section class="mt-6">
-							<div data-slides class="h-[400px] w-[700px] overflow-hidden relative">
-								<% currentDeck.cards.forEach((card)=> { %>
+				<section class="mt-6">
+					<div class="h-[400px] w-[700px] overflow-hidden">
+						<div
+							data-slides
+							class="overflow relative flex"
+						>
+							<% currentDeck.cards.forEach((card, index)=> { %>
+							<div
+								id="<%= index %>"
+								class="flip-card h-[400px] w-[700px] shrink-0 slide cursor-pointer inline-block"
+								data-active="not-active"
+								data-flipped="false"
+							>
+								<div class="flip-card-inner">
 									<div
-									data-active="not-active"
-									class="bg-[#2e3856] rounded-lg flex justify-center items-center w-full h-full absolute inset-0 slide"
-								>
-									<div
-										class="w-6 h-6 absolute top-5 right-5 cursor-pointer hover:scale-125 transition-transform duration-300"
+										class="bg-[#2e3856] rounded-lg flex justify-center items-center w-full h-full flip-card-front"
 									>
-										<img
-											class="w-full h-full object-cover"
-											src="/assets/star.svg"
-											alt=""
-										/>
+										<!-- <div
+											class="w-6 h-6 absolute top-5 right-5 cursor-pointer hover:scale-125 transition-transform duration-300"
+										>
+											<img
+												class="w-full h-full object-cover"
+												src="/assets/star.svg"
+												alt=""
+											/>
+										</div> -->
+										<h2 class="text-white font-semibold text-3xl">
+											<%= card.question %>
+										</h2>
 									</div>
-									<h2 class="text-white font-semibold text-3xl">
-										<%= card.question %>
-									</h2>
+									<div
+										class="bg-[#2e3856] rounded-lg flex justify-center items-center w-full h-full flip-card-back"
+									>
+										<div
+											class="w-6 h-6 absolute top-5 right-5 cursor-pointer hover:scale-125 transition-transform duration-300"
+										>
+											<img
+												class="w-full h-full object-cover"
+												src="/assets/star.svg"
+												alt=""
+											/>
+										</div>
+										<h2 class="text-white font-semibold text-3xl">
+											<%= card.answer %>
+										</h2>
+									</div>
 								</div>
-									<% }) %>
 							</div>
-						<div class="my-3 relative">
-							<div class="flex justify-center items-center gap-x-10">
-								<button
-									class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
-									data-slider-button="prev"
-								>
-									<img
-										class="w-[90%] h-[90%] object-cover"
-										src="/assets/arrow-left.svg"
-										alt=""
-									/>
-								</button>
-								<div>
-									<span class="text-white font-light text-sm">1 / 2</span>
-								</div>
-								<button
-									class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
-									data-slider-button="next"
-								>
-									<img
-										class="w-[90%] h-[90%] object-cover"
-										src="/assets/arrow-right.svg"
-										alt=""
-									/>
-								</button>
-							</div>
+							<% }) %>
+						</div>
+					</div>
+					<div class="my-3 relative">
+						<div class="flex justify-center items-center gap-x-10">
 							<button
-								class="hover:scale-105 transition-transform duration-200 absolute top-[20%] right-5"
-								type="button"
-								id="delete-card"
-								data-currentCard="<%= currentDeck._id %>"
+								class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+								onclick="changeSlide(-1)"
 							>
 								<img
-									class="w-6 h-6 object-cover"
-									src="/assets/delete.svg"
+									class="w-[90%] h-[90%] object-cover"
+									src="/assets/arrow-left.svg"
+									alt=""
+								/>
+							</button>
+							<div>
+								<span
+									id="current-slide"
+									class="text-white font-light text-sm"
+								>
+								</span>
+							</div>
+							<button
+								class="h-10 w-10 rounded-full border border-white flex justify-center items-center hover:bg-slate-200 hover:bg-opacity-40 transition-colors duration-300"
+								onclick="changeSlide(1)"
+							>
+								<img
+									class="w-[90%] h-[90%] object-cover"
+									src="/assets/arrow-right.svg"
 									alt=""
 								/>
 							</button>
 						</div>
-						<div class="w-full bg-white h-[1px] rounded-md"></div>
-					</sect>
+						<button
+							class="hover:scale-105 transition-transform duration-200 absolute top-[20%] right-5"
+							type="button"
+							id="delete-card"
+							data-currentCard="<%= currentDeck._id %>"
+						>
+							<img
+								class="w-6 h-6 object-cover"
+								src="/assets/delete.svg"
+								alt=""
+							/>
+						</button>
+					</div>
+					<div class="w-full bg-white h-[1px] rounded-md"></div>
+				</section>
 			</section>
 		</main>
 		<script src="/scripts/deck.js"></script>

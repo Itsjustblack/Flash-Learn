@@ -1,22 +1,16 @@
 const deleteButton = document.querySelector("#delete-card");
-
 const sliderButtons = document.querySelectorAll("[data-slider-button]");
 const slides = document.querySelector("[data-slides]");
+const cards = document.querySelectorAll(".slide");
 
-sliderButtons.forEach((button) => {
-	slides.children[0].dataset.active = "active";
-	DisableNextButton(button);
-	button.addEventListener("click", (e) => {
-		const offset = button.dataset.sliderButton === "next" ? 1 : -1;
-		const activeSlide = slides.querySelector(`[data-active="active"]`);
-		let newIndex = [...slides.children].indexOf(activeSlide) + offset;
+const counter = document.querySelector("#current-slide");
 
-		if (newIndex < 1) newIndex = slides.children.length - 1;
+UpdateCurrentSlide(1);
 
-		if (newIndex > slides.children.length - 1) newIndex = 0;
-
-		[...slides.children][newIndex].dataset.active = "active";
-		activeSlide.dataset.active = "not-active";
+cards.forEach((card) => {
+	card.addEventListener("click", (e) => {
+		const isFlipped = card.dataset.flipped === "true";
+		card.dataset.flipped = isFlipped ? "false" : "true";
 	});
 });
 
@@ -39,4 +33,31 @@ function DisableNextButton(button) {
 	if (button.dataset.sliderButton) {
 		if (slides.children.length <= 1) button.disabled = true;
 	}
+}
+
+const slideWidth = slides.clientWidth;
+let currentSlide = 0;
+
+function changeSlide(direction) {
+	currentSlide += direction;
+	if (currentSlide < 0) {
+		currentSlide = slides.children.length - 1;
+	} else if (currentSlide >= slides.children.length) {
+		currentSlide = 0;
+	}
+	UpdateCurrentSlide(currentSlide + 1);
+	updateSlider();
+	cards.forEach((card) => {
+		card.dataset.flipped = false;
+	});
+}
+
+function updateSlider() {
+	const translateX = -currentSlide * slideWidth;
+	slides.style.transform = `translateX(${translateX}px)`;
+}
+
+function UpdateCurrentSlide(slide) {
+	let slideCount = slides.children.length;
+	counter.innerHTML = `${slide} / ${slideCount}`;
 }
