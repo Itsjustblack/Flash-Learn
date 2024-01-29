@@ -98,3 +98,20 @@ function AddDeleteButton() {
 		});
 	});
 }
+
+// Logout Button Function
+const logoutBtn = document.querySelector("#logout");
+
+logoutBtn.addEventListener("click", async (e) => {
+	e.preventDefault();
+	try {
+		const res = await fetch("/logout", {
+			method: "post",
+		});
+		const data = await res.json();
+		alert(data.message);
+		setTimeout(() => (document.location.href = "/"), 100);
+	} catch (error) {
+		console.log(error);
+	}
+});

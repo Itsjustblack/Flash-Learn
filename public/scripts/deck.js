@@ -47,9 +47,11 @@ function changeSlide(direction) {
 	}
 	UpdateCurrentSlide(currentSlide + 1);
 	updateSlider();
-	cards.forEach((card) => {
-		card.dataset.flipped = false;
-	});
+	setTimeout(() => {
+		cards.forEach((card) => {
+			card.dataset.flipped = false;
+		});
+	}, 400);
 }
 
 function updateSlider() {
@@ -61,3 +63,21 @@ function UpdateCurrentSlide(slide) {
 	let slideCount = slides.children.length;
 	counter.innerHTML = `${slide} / ${slideCount}`;
 }
+
+// Logout Button Function
+const logoutBtn = document.querySelector("#logout");
+
+logoutBtn.addEventListener("click", async (e) => {
+	e.preventDefault();
+	try {
+		const res = await fetch("/logout", {
+			method: "post",
+			credentials: "include",
+		});
+		const data = await res.json();
+		alert(data.message);
+		setTimeout(() => (document.location.href = "/"), 100);
+	} catch (error) {
+		console.log(error);
+	}
+});
